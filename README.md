@@ -106,6 +106,8 @@ The following tables were created and stored in a Databricks database as **Delta
 | date_dim | Dimension | Date table used for time intelligence calculations |
 | sales_fact | Fact | Central fact table containing sales transactions |
 
+The fact table is connected to dimension tables using surrogate keys to enable efficient analytical queries.
+
 ---
 
 ## Data Storage
@@ -129,7 +131,7 @@ The following technologies and tools were used to build this data pipeline and a
 | Storage Layer | Delta Lake |
 | Data Processing | PySpark |
 | Data Modeling | Star Schema |
-| Query Language | SQL(Snowflake) |
+| Query Language | SQL (Databricks SQL, Snowflake SQL) |
 | Data Visualization | Power BI |
 | Version Control | Git, GitHub |
 
@@ -185,6 +187,25 @@ The end-to-end workflow implemented in this project follows these steps:
 3. Silver data is transformed and modeled into a **Star Schema** in the **Gold layer**.
 4. Gold tables are queried using **SQL for exploratory data analysis**.
 5. The final curated dataset is connected to **Power BI for dashboard creation and storytelling**.
+
+---
+
+## Business Questions Answered
+
+The Gold layer enables answering key business questions such as:
+
+- What is the total sales and profit?
+- Which customer segments are the most profitable?
+- How do sales trends vary over time?
+- Which regions contribute the most to overall sales?
+- What is the impact of discounts on profit?
+- What are the top-selling products?
+- Who are the high-value customers (top 20%)?
+- What is the correlation between profit and discount?
+- What is the average profit margin per category?
+- What is the year-over-year (YoY) growth?
+- What is the customer RFM (Recency, Frequency, Monetary) distribution?
+- How does region-wise sales compare with profit efficiency?
 
 ---
 
