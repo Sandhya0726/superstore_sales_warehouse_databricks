@@ -129,7 +129,7 @@ The following technologies and tools were used to build this data pipeline and a
 | Storage Layer | Delta Lake |
 | Data Processing | PySpark |
 | Data Modeling | Star Schema |
-| Query Language | SQL |
+| Query Language | SQL(Snowflake) |
 | Data Visualization | Power BI |
 | Version Control | Git, GitHub |
 
@@ -143,18 +143,20 @@ The repository is organized to clearly separate notebooks, datasets, and documen
 superstore-data-pipeline/
 │
 ├── data
-│   └── raw
-│       └── superstore_sales.csv
+│ └── raw
+│ └── superstore_sales.csv
 │
 ├── notebooks
-│   ├── 01_data_ingestion_bronze.ipynb
-│   ├── 02_data_transformation_silver.ipynb
-│   └── 03_data_integration_gold.ipynb
-│
+│ ├── 01_data_ingestion_bronze.ipynb
+│ ├── 02_data_transformation_silver.ipynb
+│ └── 03_data_integration_gold.ipynb
+|
+|── sql
+│ ├── ddl.sql
+│ ├── dml.sql
+│ └── sales_analytics.sql
+|
 ├── README.md
-│
-└── documentation
-    └── architecture_notes.md
 ```
 
 ### Directory Description
@@ -186,13 +188,47 @@ The end-to-end workflow implemented in this project follows these steps:
 
 ---
 
+## Snowflake Analytics
+
+After building the Medallion Architecture in Databricks and creating Gold layer Delta tables, the curated data was migrated to **Snowflake** for analytical processing.
+
+This section contains:
+
+- **DDL:** Table creation scripts in Snowflake
+- **DML:** Data loading scripts from CSVs into Snowflake tables
+- **Analytical Queries:** SQL queries for business insights, reporting, and advanced analytics
+
+---
+
+### Snowflake DDL
+
+The following tables were created in Snowflake to replicate the Gold layer structure:
+
+- `customer_dim`
+- `order_dim`
+- `product_dim`
+- `market_dim`
+- `date_dim`
+- `sales_fact`
+
+**Example DDL for `customer_dim`:**
+
+```sql
+create or replace table customer_dim (
+    customer_id integer not null primary key,
+    customer_name varchar,
+    segment varchar,
+    country varchar,
+    state varchar
+);
+```
+
 ## Next Steps
 
 The next phase of the project includes:
 
-1. Performing **Exploratory Data Analysis (EDA)** using SQL
-2. Connecting the Gold layer tables to **Power BI**
-3. Implementing **time intelligence calculations**
-4. Building an **interactive dashboard with business storytelling**
+1. Connecting the Gold layer tables to **Power BI**
+2. Implementing **time intelligence calculations**
+3. Building an **interactive dashboard with business storytelling**
 
 This workflow demonstrates how modern data engineering practices can be used to convert raw transactional data into structured datasets ready for advanced analytics and visualization.
