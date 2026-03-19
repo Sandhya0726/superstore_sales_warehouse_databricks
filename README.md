@@ -145,19 +145,22 @@ The repository is organized to clearly separate notebooks, datasets, and documen
 superstore-data-pipeline/
 │
 ├── data
-│ └── raw
-│ └── superstore_sales.csv
+│   └── raw
+│       └── superstore_sales.csv
 │
 ├── notebooks
-│ ├── 01_data_ingestion_bronze.ipynb
-│ ├── 02_data_transformation_silver.ipynb
-│ └── 03_data_integration_gold.ipynb
-|
-|── sql
-│ ├── ddl.sql
-│ ├── dml.sql
-│ └── sales_analytics.sql
-|
+│   ├── 01_data_ingestion_bronze.ipynb
+│   ├── 02_data_transformation_silver.ipynb
+│   └── 03_data_integration_gold.ipynb
+│
+├── sql
+│   ├── ddl.sql
+│   ├── dml.sql
+│   └── sales_analytics.sql
+│
+├── images
+│   └── image.png
+│
 ├── README.md
 ```
 
@@ -185,7 +188,7 @@ The end-to-end workflow implemented in this project follows these steps:
 1. Raw CSV dataset is ingested into the **Bronze layer** in Databricks.
 2. Bronze data is cleaned and standardized in the **Silver layer**.
 3. Silver data is transformed and modeled into a **Star Schema** in the **Gold layer**.
-4. Gold tables are queried using **SQL for exploratory data analysis**.
+4. Gold tables are queried in Snowflake for **Exploratory and analytical processing**.
 5. The final curated dataset is connected to **Power BI for dashboard creation and storytelling**.
 
 ---
@@ -244,12 +247,37 @@ create or replace table customer_dim (
 );
 ```
 
-## Next Steps
+## Power BI Integration
 
-The next phase of the project includes:
+After performing analytical queries in Snowflake, the database was connected to Power BI Desktop to build an interactive dashboard.
 
-1. Connecting the Gold layer tables to **Power BI**
-2. Implementing **time intelligence calculations**
-3. Building an **interactive dashboard with business storytelling**
+**Workflow**
 
-This workflow demonstrates how modern data engineering practices can be used to convert raw transactional data into structured datasets ready for advanced analytics and visualization.
+1. Connected Snowflake database to Power BI Desktop
+2. Imported Gold layer tables into Power BI
+3. Established relationships using the Star Schema
+4. Created DAX measures for business metrics
+5. Built an interactive dashboard for insights and storytelling
+
+**Dashboard Features**
+
+1. KPI Cards (Sales, Profit, YoY Growth)
+2. Time-based analysis using Date Dimension
+3. Region-wise and Segment-wise performance
+4. Profit vs Discount analysis
+5. Top products
+6. Year and YOY growth calculation
+7. Interactive slicers (Year, Category)
+
+**Dashboard**
+![Dashboard](images/image.png)
+
+## Key Highlights
+
+- End-to-end Data Engineering + Analytics project
+- Implementation of Medallion Architecture
+- Integration of Databricks, Snowflake, and Power BI
+- Star Schema data modeling for analytics
+- Interactive dashboard with business insights
+
+This integration completes the end-to-end data pipeline by enabling business users to explore insights through interactive visualizations and data storytelling.
