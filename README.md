@@ -268,6 +268,7 @@ After performing analytical queries in Snowflake, the database was connected to 
 5. Top products
 6. Year and YOY growth calculation
 7. Interactive slicers (Year, Category)
+8. Line and Bar charts with drill-down and drill-up capability for detailed analysis
 
 **Dashboard**
 ![Dashboard](images/image.png)
